@@ -1,9 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from src.routers import __all__ as routers
-from src.core import (
-    APIINFO
-)
+from src.core import APIINFO
 
 
 def get_application():
