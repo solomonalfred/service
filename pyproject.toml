@@ -1,5 +1,5 @@
 [project]
-name = "yadro-tech"
+name = "service"
 version = "0.1.0"
 dependencies = []
 

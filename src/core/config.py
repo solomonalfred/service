@@ -22,6 +22,7 @@ class Settings(BaseSettings):
     DB_NAME: str
 
     PORT: int
+    PORT_INTERNAL: int
 
     CREATE_ADMIN: bool = True
     ADMIN_LOGIN: str
@@ -57,5 +58,5 @@ def get_settings() -> Settings:
     return Settings()
 
 if __name__ == "__main__":
-    settings = get_settings().json()
+    settings = get_settings().model_dump_json()
     print(settings)
