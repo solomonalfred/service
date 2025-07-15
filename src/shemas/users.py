@@ -1,14 +1,15 @@
-from datetime import date
-from typing import Optional
 from uuid import UUID
-from pydantic import BaseModel, Field, EmailStr, SecretStr
+from typing import Optional
+from pydantic import BaseModel, Field, EmailStr
+
 from src.core.constants import UserType, UserRole
 
 
-class UserBase(BaseModel):
-    type: UserType = Field(..., description="LE / NP / IE / SE")
+class UserCreate(BaseModel):
+    name: str = Field(..., max_length=255)
+    password: str = Field(..., min_length=5)
+    type: UserType
     role: UserRole = UserRole.employee
-    name: str
     shortname: Optional[str] = None
     tin: Optional[str] = None
     ogrn: Optional[str] = None
@@ -17,21 +18,20 @@ class UserBase(BaseModel):
     manager_name: Optional[str] = None
     manager_position: Optional[str] = None
 
-class UserInfo(UserBase):
-    password_hash: SecretStr
-
 class UserPatch(BaseModel):
-    role: Optional[UserRole] = None
     shortname: Optional[str] = None
-    tin: Optional[str]= None
+    role: Optional[UserRole] = None
+    tin: Optional[str] = None
     ogrn: Optional[str] = None
     kpp: Optional[str] = None
     brand: Optional[str] = None
     manager_name: Optional[str] = None
-    manager_position:Optional[str] = None
-    password: Optional[SecretStr] = None
+    manager_position: Optional[str] = None
 
-class UserRead(UserBase):
+class UserRead(BaseModel):
     id: UUID
+    name: str
+    type: UserType
+    role: UserRole
     class Config:
         from_attributes = True

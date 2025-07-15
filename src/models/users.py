@@ -31,12 +31,12 @@ class User(Base):
                                            nullable=False,
                                            server_default=UserRole.employee.value)
 
-    name: Mapped[str] = mapped_column(VARCHAR(255), nullable=False)
+    name: Mapped[str] = mapped_column(VARCHAR(255), nullable=False, unique=True)
     shortname: Mapped[Optional[str]] = mapped_column(VARCHAR(255))
 
-    tin: Mapped[Optional[str]] = mapped_column(String(12))
-    ogrn: Mapped[Optional[str]] = mapped_column(String(15))
-    kpp: Mapped[Optional[str]] = mapped_column(String(9))
+    tin: Mapped[Optional[str]] = mapped_column(String(12), unique=True)
+    ogrn: Mapped[Optional[str]] = mapped_column(String(15), unique=True)
+    kpp: Mapped[Optional[str]] = mapped_column(String(9), unique=True)
 
     brand: Mapped[Optional[str]] = mapped_column(VARCHAR(255))
     manager_name: Mapped[Optional[str]] = mapped_column(VARCHAR(255))
